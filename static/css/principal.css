@@ -1,0 +1,36 @@
+.pagina
+{
+    background-color: #4094A6;
+}
+.barra
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo
+{
+    border-radius: 50%;
+    margin-top: 100px;
+}
+
+.btnini
+{ 
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.btnden
+{
+    width: 200px;
+    height: 60px;
+
+    font-style: normal;
+    font-size: 24px;
+    background-color: #4f4f4f;
+    color: white;
+    border-radius: 50px;
+    margin-top: 50px;
+}
