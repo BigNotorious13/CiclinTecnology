@@ -1,5 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Chonburi&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .horas 
 {
+    font-family: 'Chonburi', serif;
     margin: auto;
     width: 90%;
     height: 80%;

@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cycling Tecnology</title>
+
+    <link rel="stylesheet" href="{% static 'css/iniJuez.css' %}">
+
+</head>
+<body class="pagina">
+
+    <div class="principal">
+        <div class="barra">
+            <img class="logo" src="{% static 'img/logo.png' %}">
+        </div>
+        <div class="datos">
+            <div class="nombre">
+                <h2>Usuario</h2>
+                <input type="text" class="nom" placeholder="USUARIO">
+            </div>
+            <div class="contra">
+                <h2>Contraseña</h2>
+                <input type="text" class="nom" placeholder="********">
+            </div>
+            <div class="recupera">
+                <h2>¿Perdiste tu contraseña?</h2>
+            </div>
+            <div class="btnini">
+                <button class="btnden">INICIO</button>
+            </div>
+            <div class="iniciar">
+                <h2>Iniciar sesion con</h2>
+            </div>
+            <div class="logos">
+                <img class="face" src="{% static 'img/facebook(1).png' %}" alt="">
+                <img class="face" src="{% static 'img/instagram.png' %}" alt="">
+                <img class="face" src="{% static 'img/google(1).png' %}" alt="">
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

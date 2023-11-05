@@ -22,8 +22,8 @@
 .informacion
 {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    background: #000000;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    background: #D80000;
     width: 90%;
     height: 60px;
     margin: auto;
