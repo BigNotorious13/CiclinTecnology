@@ -9,6 +9,7 @@ def principal(request):
 def posiciones(request):
     return render(request, 'posiciones/posicion.html')
 
+
 def resultados(request):
     return render(request, 'resultados/resultado.html')
 
@@ -39,3 +40,7 @@ def categoria_master30(request):
 
 def categoria_master40(request):
     return render(request, 'categoria/master40.html')
+
+
+def equipo_constru(request):
+    return render(request, 'equipos/constru.html')

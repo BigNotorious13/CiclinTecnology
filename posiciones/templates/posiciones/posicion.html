@@ -1,43 +1,12 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posiciones</title>
+{% extends 'base.html' %}
 
-    <link rel="stylesheet" href="{% static 'css/posicion.css' %}">
-</head>
-<body>
-    <div class="horas">
-        <h1 class="titulo">Categoria Elite en VIVO</h1>
-        <div class="informacion">
-            <h2>LUGAR</h2>
-            <h2>No.</h2>
-            <h2>NOMBRE</h2>
-            <h2>EQUIPO</h2>
-            <h2>VUELTAS</h2>
-            <h2>TIEMPO</h2>
-        </div>
-        <div class="muestra">
-
-        </div>
-        <div class="muestra">
-
-        </div>
-        <div class="muestra">
-
-        </div>
-        <div class="muestra">
-
-        </div>
-        <div class="muestra">
-
-        </div>
-        <div class="muestra">
-
-        </div>
-        
-    </div>
-</body>
-</html>
+{% block title %} Categoria Master 45 {% endblock %}
+{% block div_title %} Categoria Elite en VIVO {% endblock %}
+{% block titulos %}
+    <h2>LUGAR</h2>
+    <h2>No.</h2>
+    <h2>NOMBRE</h2>
+    <h2>EQUIPO</h2>
+    <h2>VUELTAS</h2>
+    <h2>TIEMPO</h2>
+{% endblock %}

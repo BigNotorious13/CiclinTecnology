@@ -12,4 +12,5 @@ urlpatterns = [
     path('categorias/femenil/', views.categoria_femenil, name='cate_femenil'),
     path('categorias/master30', views.categoria_master30, name='cate_master30'),
     path('categorias/master40', views.categoria_master40, name='cate_master40'),
+    path('equipos/ConstruBike', views.equipo_constru, name='equi_construbike'),
 ]

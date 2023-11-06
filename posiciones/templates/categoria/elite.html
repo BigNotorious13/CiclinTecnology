@@ -1,40 +1,9 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELITE</title>
+{% extends 'base.html' %}
 
-    <link rel="stylesheet" href="{% static 'css/elite.css' %}">
-</head>
-<body>
-    <div class="horas">
-        <h1 class="titulo">ELITE</h1>
-        <div class="informacion">
-            <h2>No.</h2>
-            <h2>Nombre</h2>
-            <h2>Equipo</h2>
-        </div>
-        <div class="muestra">
-
-        </div>
-        <div class="muestra">
-
-        </div>
-        <div class="muestra">
-
-        </div>
-        <div class="muestra">
-
-        </div>
-        <div class="muestra">
-
-        </div>
-        <div class="muestra">
-
-        </div>
-        
-    </div>
-</body>
-</html>
+{% block title %} Categoria Elite {% endblock %}
+{% block div_title %} ELITE {% endblock %}
+{% block titulos %}
+    <h2>No.</h2>
+    <h2>NOMBRE</h2>
+    <h2>EQUIPO</h2>
+{% endblock %}
