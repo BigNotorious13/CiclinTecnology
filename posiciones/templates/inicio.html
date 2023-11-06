@@ -32,16 +32,16 @@
 
                 <ul class="lista_abierta">
                     <li class="inside">
-                        <a href="#" class="link link--modificar">Elite</a>
+                        <a href="{% url 'cate_elite' %}" class="link link--modificar">Elite</a>
                     </li>
                     <li class="inside">
-                        <a href="#" class="link link--modificar">Master 30</a>
+                        <a href="{% url 'cate_master30' %}" class="link link--modificar">Master 30</a>
                     </li>
                     <li class="inside">
-                        <a href="#" class="link link--modificar">Master 45</a>
+                        <a href="{% url 'cate_master40' %}" class="link link--modificar">Master 45</a>
                     </li>
                     <li class="inside">
-                        <a href="#" class="link link--modificar">Femenil</a>
+                        <a href="{% url 'cate_femenil' %}" class="link link--modificar">Femenil</a>
                     </li>
                 </ul>
             </li>
@@ -71,7 +71,7 @@
             <li class="lista_general">
                 <div class="vista">
                     <!-- <img class="img" src="img/logo.png"> -->
-                    <a href="#" class="link">POSICIONES</a>
+                    <a href="{% url 'posiciones' %}" class="link">POSICIONES</a>
                     <img class="images" src="{% static 'img/bicycle.png' %}" alt="">
                 </div>
             </li>
@@ -79,7 +79,7 @@
             <li class="lista_general">
                 <div class="vista">
                     <!-- <img class="img" src="img/logo.png"> -->
-                    <a href="#" class="link">RESULTADOS</a>
+                    <a href="{% url 'resultados' %}" class="link">RESULTADOS</a>
                     <img class="images" src="{% static 'img/rankings.png' %}" alt="">
                 </div>
             </li>
