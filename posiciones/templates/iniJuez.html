@@ -13,30 +13,34 @@
 
     <div class="principal">
         <div class="barra">
-            <img class="logo" src="{% static 'img/logo.png' %}">
+            <img class="logo" src="{% static 'img/logo.png' %}" alt="">
         </div>
         <div class="datos">
             <div class="nombre">
                 <h2>Usuario</h2>
-                <input type="text" class="nom" placeholder="USUARIO">
+                <label>
+                    <input type="text" class="nom" placeholder="USUARIO">
+                </label>
             </div>
             <div class="contra">
                 <h2>Contraseña</h2>
-                <input type="text" class="nom" placeholder="********">
+                <label>
+                    <input type="text" class="nom" placeholder="********">
+                </label>
             </div>
             <div class="recupera">
                 <h2>¿Perdiste tu contraseña?</h2>
             </div>
             <div class="btnini">
-                <button class="btnden">INICIO</button>
+                <a href="{% url 'inicio' %}"><button class="btnden">INICIO</button></a>
             </div>
             <div class="iniciar">
                 <h2>Iniciar sesion con</h2>
             </div>
             <div class="logos">
-                <img class="face" src="{% static 'img/facebook(1).png' %}" alt="">
+                <img class="face" src="{% static 'img/facebook.png' %}" alt="">
                 <img class="face" src="{% static 'img/instagram.png' %}" alt="">
-                <img class="face" src="{% static 'img/google(1).png' %}" alt="">
+                <img class="face" src="{% static 'img/google.png' %}" alt="">
             </div>
         </div>
         
