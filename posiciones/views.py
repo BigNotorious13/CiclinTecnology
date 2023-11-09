@@ -1,46 +1,73 @@
-from django.shortcuts import render
+from django.template import loader
+from django.http import HttpResponse
 
 
 # Create your views here.
 def principal(request):
-    return render(request, 'principal.html')
+    template = loader.get_template('principal.html')
+    res = template.render(request=request)
+    return HttpResponse(res)
 
 
 def posiciones(request):
-    return render(request, 'posiciones/posicion.html')
+    template = loader.get_template('posiciones/posicion.html')
+    res = template.render(request=request)
+    return HttpResponse(res)
 
 
 def resultados(request):
-    return render(request, 'resultados/resultado.html')
-
+    template = loader.get_template('resultados/resultado.html')
+    res = template.render(request = request)
+    return HttpResponse(res)
 
 def login_juez(request):
-    return render(request, 'iniJuez.html')
+    template = loader.get_template('iniJuez.html')
+    res = template.render(request=request)
+    return HttpResponse(res)
+
+
+data_horarios = {'titulos': ['Ubicacion', 'Horario', 'Categoria']}
 
 
 def inicio(request):
-    return render(request, 'inicio.html')
+    template = loader.get_template('horarios/horario.html')
+    data = data_horarios
+    res = template.render(data, request)
+    return HttpResponse(res)
 
 
 def horario(request):
-    return render(request, 'horarios/horario.html')
+    template = loader.get_template('horarios/horario.html')
+    data = data_horarios
+    res = template.render(data, request)
+    return HttpResponse(res)
 
 
 def categoria_elite(request):
-    return render(request, 'categoria/elite.html')
+    template = loader.get_template('categoria/elite.html')
+    res = template.render(request= request)
+    return HttpResponse(res)
 
 
 def categoria_femenil(request):
-    return render(request, 'categoria/femenil.html')
+    template = loader.get_template('categoria/femenil.html')
+    res = template.render(request=request)
+    return HttpResponse(res)
 
 
 def categoria_master30(request):
-    return render(request, 'categoria/master30.html')
+    template = loader.get_template('categoria/master30.html')
+    res = template.render(request=request)
+    return HttpResponse(res)
 
 
 def categoria_master40(request):
-    return render(request, 'categoria/master40.html')
+    template = loader.get_template('categoria/master40.html')
+    res = template.render(request=request)
+    return HttpResponse(res)
 
 
 def equipo_constru(request):
-    return render(request, 'equipos/constru.html')
+    template = loader.get_template('equipos/constru.html')
+    res = template.render(request=request)
+    return HttpResponse(res)
