@@ -3,7 +3,32 @@
 {% block title %} Categoria Elite {% endblock %}
 {% block div_title %} ELITE {% endblock %}
 {% block titulos %}
-    <h2>No.</h2>
-    <h2>NOMBRE</h2>
-    <h2>EQUIPO</h2>
+     <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
+            <th>Ciudad</th>
+            <th>Estado</th>
+            <th>Curp</th>
+            <th>Edad</th>
+            <th>Tipo Sangre</th>
+        </tr>
+    </thead>
+{% endblock %}
+{% block contenido %}
+    <tbody>
+    {% for competidor in competidores %}
+        <tr>
+        <td>{{ competidor.nombre }}</td>
+        <td>{{ competidor.direccion }}</td>
+        <td>{{ competidor.telefono }}</td>
+        <td>{{ competidor.ciudad }}</td>
+        <td>{{ competidor.estado }}</td>
+        <td>{{ competidor.curp }}</td>
+        <td>{{ competidor.edad }}</td>
+        <td>{{ competidor.tipo_sangre }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
 {% endblock %}

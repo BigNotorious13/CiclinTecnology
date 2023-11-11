@@ -3,7 +3,22 @@
 {% block title %} Equipo - ConstruBike {% endblock %}
 {% block div_title %} CORREDORES DEL EQUIPO CONSTRUBIKE LA BARCA {% endblock %}
 {% block titulos %}
-    <h2>No.</h2>
-    <h2>NOMBRE</h2>
-    <h2>CATEGORIA</h2>
+     <thead>
+        <tr>
+            <th>NOMBRE</th>
+            <th>CIUDAD</th>
+            <th>COMPETIDORES</th>
+        </tr>
+    </thead>
+{% endblock %}
+{% block contenido %}
+    <tbody>
+        {% for equipo in equipos %}
+            <tr>
+                <td>{{ equipo.nombre }}</td>
+                <td>{{ equipo.ciudad }}</td>
+                <td>{{ equipo.cantidad }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
 {% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% load crispy_forms_filters %}
+
+{% block contenido %}
+
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+
+                    <div class="d-flex justify-content-end">
+
+                         <button type="submit" class="btn btn-primary">
+                            Agregar
+                        </button>
+                    </div>
+
+                </form>
+
+{% endblock %}

@@ -9,6 +9,7 @@ urlpatterns = [
     path('posiciones/', views.posiciones, name='posiciones'),
     path('resultados/', views.resultados, name='resultados'),
     path('categorias/elite/', views.categoria_elite, name='cate_elite'),
+    path('categorias/agregar/', views.agregar_categoria, name='agregar_cate'),
     path('categorias/femenil/', views.categoria_femenil, name='cate_femenil'),
     path('categorias/master30', views.categoria_master30, name='cate_master30'),
     path('categorias/master40', views.categoria_master40, name='cate_master40'),
