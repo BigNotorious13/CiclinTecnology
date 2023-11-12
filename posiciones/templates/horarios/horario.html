@@ -6,16 +6,16 @@
 
     <thead>
         <tr>
-            <th>Nombre</th>
+            <th class="titulo">Nombre</th>
             <th>Requisitos</th>
         </tr>
     </thead>
 
 {% endblock %}
 {% block contenido %}
-    <tbody>
+    <tbody class="">
         {% for categoria in categorias %}
-            <tr>
+            <tr class="muestra">
                 <td>{{ categoria.nombre }}</td>
                 <td>{{ categoria.requisitos }}</td>
             </tr>
