@@ -3,6 +3,7 @@ from django.db import models
 
 # Create your models here.
 class Equipo(models.Model):
+    clv = models.PositiveIntegerField(primary_key=True, auto_created=True, blank=False, null=False)
     nombre = models.CharField(max_length=30)
     ciudad = models.CharField(max_length=30)
     cantidad = models.IntegerField()

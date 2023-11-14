@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.contrib import messages
+from django.shortcuts import render, get_object_or_404, redirect
 from posiciones.models import Categoria, Carrera, Equipo, Competidor
 from posiciones.forms import CategoriaForm, CarreraForm, EquipoForm, CompetidorForm
 
@@ -9,7 +10,6 @@ def principal(request):
 
 
 def posiciones(request):
-
     return render(request, 'posiciones/posicion.html')
 
 
@@ -32,22 +32,46 @@ def inicio(request):
                   context=data)
 
 
-def agregar_categoria(request):
+def agregar_equipo(request):
     data = {
-        'form': CategoriaForm()
+        'form': EquipoForm()
     }
 
     # Agregar la informción que se envio
     if request.method == 'POST':
         # Crear el formulario con los datos enviados
-        formulario = CategoriaForm(data=request.POST)
+        formulario = EquipoForm(data=request.POST)
         # Validar la información
         if formulario.is_valid():
             formulario.save()
-            data['mensaje'] = 'Categoria guardada'
+            data['mensaje'] = 'Equipo guardado'
         else:
             data['form'] = formulario
-    return render(request, 'categoria/agregar.html', data)
+    return render(request, 'equipos/agregar.html', data)
+
+
+def modificar_equipo(request, clv):
+    equipo = get_object_or_404(Equipo, clv=clv)
+    data = {
+        'form': EquipoForm(instance=equipo)
+    }
+    # Si el usuarioya dijo que si, POST
+    if request.method == 'POST':
+        formulario = EquipoForm(data=request.POST, instance=equipo)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Equipo Actualizado")
+            return redirect(to='equipos')
+        # Si no es valido
+        data['form'] = formulario
+    return render(request, 'equipos/modificar.html', data)
+
+
+def eliminar_equipo(request, clv):
+    equipo = get_object_or_404(Equipo, clv=clv)
+    equipo.delete()
+    messages.success(request, "Equipo Eliminado")
+    return redirect(to='equipos')
 
 
 def horario(request):
@@ -93,9 +117,10 @@ def categoria_master40(request):
     return render(request, 'categoria/elite.html', context=data)
 
 
-def equipo_constru(request):
-    equipos = Equipo.objects.all()
+def equipos(request):
+    equi = Equipo.objects.all()
     data = {
-        'equipos': equipos
+        'titulos': ['ID', 'CIUDAD', 'NOMBRE', 'CANTIDAD COMP.', 'ACCIONES'],
+        'equipos': equi
     }
-    return render(request, 'equipos/constru.html', context=data)
+    return render(request, 'Equipos.html', context=data)

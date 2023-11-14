@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %} Equipos {% endblock %}
+{% block div_title %} Equipos {% endblock %}
+{% block tabla_titulos %}
+
+    <thead>
+        <tr>
+            {% for titulo in titulos %}
+                <th>{{ titulo }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+
+{% endblock %}
+{% block tabla_contenido %}
+    <a href="{% url 'agregar_equipo' %}">Agregar Nuevo Equipo</a>
+    <tbody>
+
+             {% for equipo in equipos %}
+            <tr>
+                <td>{{ equipo.clv }}</td>
+                <td>{{ equipo.nombre }}</td>
+                <td>{{ equipo.ciudad }}</td>
+                <td>{{ equipo.cantidad }}</td>
+                <td><a href="{% url 'modificar_equipo' clv=equipo.clv %}">Modificar</a><a href="{% url 'eliminar_equipo' clv=equipo.clv %}">Eliminar</a></td>
+            </tr>
+        {% endfor %}
+
+    </tbody>
+{% endblock %}
