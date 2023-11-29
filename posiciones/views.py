@@ -2,6 +2,18 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from posiciones.models import Categoria, Carrera, Equipo, Competidor
 from posiciones.forms import CategoriaForm, CarreraForm, EquipoForm, CompetidorForm
+from django.views.generic import ListView
+
+
+# VISTAS BASADAS EN CLASES
+class CarreraListView(ListView):
+    template_name = 'carreras/carreras_list.html'
+    model = Carrera
+    context_object_name = 'carreras'
+    paginate_by = 5
+
+
+# FIN DE LAS VISTAS BASADAS EN CLASES
 
 
 # Create your views here.
@@ -21,15 +33,15 @@ def login_juez(request):
     return render(request, 'iniJuez.html')
 
 
-def inicio(request):
-    categorias = Categoria.objects.all()
-    # Diccionario con las categorias
-    data = {
-        'categorias': categorias
-    }
-    return render(request,
-                  'horarios/horario.html',
-                  context=data)
+# def inicio(request):
+#   categorias = Categoria.objects.all()
+# Diccionario con las categorias
+#  data = {
+#   'categorias': categorias
+# }
+# return render(request,
+#             'carreras/carreras_list.html',
+#             context=data)
 
 
 def agregar_equipo(request):
@@ -72,17 +84,6 @@ def eliminar_equipo(request, id_equipo):
     equipo.delete()
     messages.success(request, "Equipo Eliminado")
     return redirect(to='equipos')
-
-
-def horario(request):
-    categorias = Categoria.objects.all()
-    # Diccionario con las categorias
-    data = {
-        'categorias': categorias
-    }
-    return render(request,
-                  'horarios/horario.html',
-                  context=data)
 
 
 def equipos(request):
