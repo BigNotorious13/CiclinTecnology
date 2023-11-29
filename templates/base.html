@@ -21,7 +21,7 @@
             </li>
             <li class="lista_general">
                 <div class="vista">
-                    <a href="{% url 'inicio' %}" class="link">HORARIOS</a>
+                    <a href="{% url 'posiciones:carrera_list' %}" class="link">CARRERAS</a>
                     <img class="images" src="{% static 'img/horario.svg' %}" alt="">
                 </div>
             </li>
@@ -55,7 +55,7 @@
         </ul>
 
     </nav>
-    <script src="{% static 'js/inicio.js' %}"></script>
+    <script src="{% static 'js/l.js' %}"></script>
 
     <div class="horas">
         <h1 class="titulo">{% block div_title %}{% endblock %}</h1>

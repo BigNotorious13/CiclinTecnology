@@ -61,7 +61,7 @@ class Carrera(models.Model):
     nombre = models.CharField(max_length=30, unique=True, blank=False, null=False)
     vueltas = models.PositiveIntegerField(blank=False, null=False)
     ubicacion = models.CharField(max_length=40, null=False, blank=False)
-    fecha = models.DateField(null=False, blank=False)
+    fecha = models.DateTimeField(null=False, blank=False, help_text="Fecha y hora de la carrera")
     many_carr_comp = models.ManyToManyField(Competidor, through="CarreraCompetidor",
                                             through_fields=('id_carrera', 'id_competidor'), )  # muchas a muchos
 
