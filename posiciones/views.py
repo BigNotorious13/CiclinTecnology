@@ -50,8 +50,8 @@ def agregar_equipo(request):
     return render(request, 'equipos/agregar.html', data)
 
 
-def modificar_equipo(request, clv):
-    equipo = get_object_or_404(Equipo, clv=clv)
+def modificar_equipo(request, id_equipo):
+    equipo = get_object_or_404(Equipo, id_equipo=id_equipo)
     data = {
         'form': EquipoForm(instance=equipo)
     }
@@ -67,8 +67,8 @@ def modificar_equipo(request, clv):
     return render(request, 'equipos/modificar.html', data)
 
 
-def eliminar_equipo(request, clv):
-    equipo = get_object_or_404(Equipo, clv=clv)
+def eliminar_equipo(request, id_equipo):
+    equipo = get_object_or_404(Equipo, id_equipo=id_equipo)
     equipo.delete()
     messages.success(request, "Equipo Eliminado")
     return redirect(to='equipos')
@@ -97,7 +97,7 @@ def equipos(request):
 def categorias(request):
     cate = Categoria.objects.all()
     data = {
-        'titulos': ['ID', 'NOMBRE', 'CANTIDAD COMP.', 'FECHA', 'ACCIONES'],
+        'titulos': ['ID', 'NOMBRE', 'REQUISITOS', 'ACCIONES'],
         'categorias': cate
     }
     return render(request, 'categorias.html', context=data)
@@ -121,8 +121,8 @@ def agregar_categoria(request):
     return render(request, 'categoria/agregar.html', data)
 
 
-def modificar_categoria(request, clv):
-    cate = get_object_or_404(Categoria, clv=clv)
+def modificar_categoria(request, id_categoria):
+    cate = get_object_or_404(Categoria, id_categoria=id_categoria)
     data = {
         'form': CategoriaForm(instance=cate)
     }
@@ -138,8 +138,8 @@ def modificar_categoria(request, clv):
     return render(request, 'categoria/modificar.html', data)
 
 
-def eliminar_categoria(request, clv):
-    cate = get_object_or_404(Categoria, clv=clv)
+def eliminar_categoria(request, id_categoria):
+    cate = get_object_or_404(Categoria, id_categoria=id_categoria)
     cate.delete()
     messages.success(request, "Categoria Eliminada")
     return redirect(to='categorias')

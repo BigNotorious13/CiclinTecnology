@@ -1,64 +1,98 @@
 from django.db import models
 
 
-# Create your models here.
 class Equipo(models.Model):
-    clv = models.PositiveIntegerField(primary_key=True, auto_created=True, blank=False, null=False)
-    nombre = models.CharField(max_length=30)
-    ciudad = models.CharField(max_length=30)
-    cantidad = models.IntegerField()
+    id_equipo = models.PositiveIntegerField(verbose_name='Clave', primary_key=True, blank=False, null=False)
+    ciudad = models.CharField(verbose_name='Ciudad', max_length=20, null=False)
+    nombre = models.CharField(verbose_name='Nombre', max_length=20, unique=True, blank=False, null=False)
+    cantidad_competidores = models.PositiveIntegerField(verbose_name='Cantidad de Competidores', blank=False, null=False)
 
-    def __str__(self):
+    def _str_(self):
         return self.nombre
 
-    # Agregar funcionalidad a la clase creada
     class Meta:
         verbose_name_plural = "Equipos"
 
 
-class Categoria(models.Model):
-    clv = models.PositiveIntegerField(primary_key=True, auto_created=True, blank=False, null=False)
-    nombre = models.CharField(max_length=30)
-    can_corredores = models.PositiveIntegerField(blank=False, default=1)
-    hora = models.DateTimeField()
+class Competidor(models.Model):
+    tipo_sangre = {
+        ("1", "A+"),
+        ("2", "A-"),
+        ("3", "B+"),
+        ("4", "B-"),
+        ("5", "AB+"),
+        ("6", "AB-"),
+        ("7", "O+"),
+        ("8", "O-")
+    }
+    id_competidor = models.PositiveIntegerField(verbose_name='Clave', primary_key=True, blank=False, null=False)
+    nombre = models.CharField(verbose_name='Nombre', max_length=30, unique=True, blank=False, null=False)
+    direccion = models.CharField(verbose_name='Direccion', max_length=40, null=False, blank=False)
+    telefono = models.CharField(verbose_name='Telefono', max_length=10, blank=False, null=False)
+    ciudad = models.CharField(verbose_name='Ciudad', max_length=20, null=False)
+    estado = models.CharField(verbose_name='Estado', max_length=20, null=False)
+    CURP = models.CharField(verbose_name='CURP', max_length=20, null=False)
+    edad = models.PositiveIntegerField(verbose_name='Edad', blank=False, null=False)
+    tipo = models.TextField(verbose_name='Tipo de Sangre', choices=tipo_sangre, blank=False)
+    id_equipo = models.ForeignKey(Equipo, on_delete=models.PROTECT)  # foreinKey
 
-    def __str__(self):
+    def _str_(self):
         return self.nombre
 
-    # Agregar funcionalidad a la clase creada
+    class Meta:
+        verbose_name_plural = "Competidores"
+
+
+class Categoria(models.Model):
+    id_categoria = models.PositiveIntegerField(verbose_name='Clave', primary_key=True, blank=False, null=False)
+    nombre = models.CharField(verbose_name='Nombre', max_length=30, unique=True, blank=False, null=False)
+    requisitos = models.TextField(verbose_name='Requisitos', blank=True, null=True)
+    many_comp = models.ManyToManyField(Competidor)  # muchas a muchos
+
+    def _str_(self):
+        return self.nombre
+
     class Meta:
         verbose_name_plural = "Categorias"
 
 
 class Carrera(models.Model):
-    nombre = models.CharField(max_length=30)
-    fecha = models.DateTimeField()
-    vueltas = models.IntegerField()
-    ubicacion = models.CharField(max_length=30)
+    id_carrera = models.PositiveIntegerField(primary_key=True, blank=False, null=False)
+    nombre = models.CharField(max_length=30, unique=True, blank=False, null=False)
+    vueltas = models.PositiveIntegerField(blank=False, null=False)
+    ubicacion = models.CharField(max_length=40, null=False, blank=False)
+    fecha = models.DateField(null=False, blank=False)
+    many_carr_comp = models.ManyToManyField(Competidor, through="CarreraCompetidor",
+                                            through_fields=('id_carrera', 'id_competidor'), )  # muchas a muchos
 
-    def __str__(self):
+    def _str_(self):
         return self.nombre
 
-    # Agregar funcionalidad a la clase creada
     class Meta:
         verbose_name_plural = "Carreras"
 
 
-class Competidor(models.Model):
-    id_categoria = models.IntegerField()
-    id_equipo = models.IntegerField()
-    nombre = models.CharField(max_length=50)
-    direccion = models.CharField(max_length=50)
-    telefono = models.CharField(max_length=13)
-    ciudad = models.CharField(max_length=30)
-    estado = models.CharField(max_length=30)
-    curp = models.CharField(max_length=18)
-    edad = models.IntegerField()
-    tipo_sangre = models.CharField(max_length=3)
+class Organizador(models.Model):
+    id_organizador = models.PositiveIntegerField(primary_key=True, blank=False, null=False)
+    nombre = models.CharField(max_length=30, unique=True, blank=False, null=False)
+    usuario = models.CharField(max_length=30, unique=True, blank=False, null=False)
+    password = models.CharField(max_length=20, blank=False, null=False)
+    many_carr = models.ManyToManyField(Carrera)
 
-    def __str__(self):
+    def _str_(self):
         return self.nombre
 
-    # Agregar funcionalidad a la clase creada
     class Meta:
-        verbose_name_plural = "Competidores"
+        verbose_name_plural = "Organizadores"
+
+
+class CarreraCompetidor(models.Model):
+    id_carrera = models.ForeignKey(Carrera, on_delete=models.PROTECT)  # foreinKey
+    id_competidor = models.ForeignKey(Competidor, on_delete=models.PROTECT)  # foreinKey
+    tiempo = models.TimeField()
+
+    def _str_(self):
+        return self.id
+
+    class Meta:
+        verbose_name_plural = "Carreras Competidores"

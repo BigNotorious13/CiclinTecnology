@@ -20,13 +20,13 @@
 <tbody>
 <tr>
     {% for equipo in equipos %}
-    <td scope="row">{{ equipo.clv }}</td>
+    <td scope="row">{{ equipo.id_equipo }}</td>
     <td >{{ equipo.nombre }}</td>
     <td >{{ equipo.ciudad }}</td>
-    <td>{{ equipo.cantidad }}</td>
+    <td>{{ equipo.cantidad_competidores }}</td>
     <td>
-        <a class="btn btn-danger" href="{% url 'eliminar_equipo' equipo.clv %}"><i class="bi bi-trash3-fill fs-6"></i></a>
-        <a class="btn btn-warning" href="{% url 'modificar_equipo' equipo.clv %}"><i class="bi bi-pencil-fill fs-6"></i></a>
+        <a class="btn btn-danger" href="{% url 'eliminar_equipo' equipo.id_equipo %}"><i class="bi bi-trash3-fill fs-6"></i></a>
+        <a class="btn btn-warning" href="{% url 'modificar_equipo' equipo.id_equipo %}"><i class="bi bi-pencil-fill fs-6"></i></a>
     </td>
     {% endfor %}
 </tr>
