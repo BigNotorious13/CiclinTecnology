@@ -85,38 +85,6 @@ def horario(request):
                   context=data)
 
 
-def categoria_elite(request):
-    competidor = Competidor.objects.all()
-    data = {
-        'competidores': competidor
-    }
-    return render(request, 'categoria/elite.html', context=data)
-
-
-def categoria_femenil(request):
-    competidor = Competidor.objects.all()
-    data = {
-        'competidores': competidor
-    }
-    return render(request, 'categoria/elite.html', context=data)
-
-
-def categoria_master30(request):
-    competidor = Competidor.objects.all()
-    data = {
-        'competidores': competidor
-    }
-    return render(request, 'categoria/elite.html', context=data)
-
-
-def categoria_master40(request):
-    competidor = Competidor.objects.all()
-    data = {
-        'competidores': competidor
-    }
-    return render(request, 'categoria/elite.html', context=data)
-
-
 def equipos(request):
     equi = Equipo.objects.all()
     data = {
@@ -124,3 +92,54 @@ def equipos(request):
         'equipos': equi
     }
     return render(request, 'Equipos.html', context=data)
+
+
+def categorias(request):
+    cate = Categoria.objects.all()
+    data = {
+        'titulos': ['ID', 'NOMBRE', 'CANTIDAD COMP.', 'FECHA', 'ACCIONES'],
+        'categorias': cate
+    }
+    return render(request, 'categorias.html', context=data)
+
+
+def agregar_categoria(request):
+    data = {
+        'form': CategoriaForm()
+    }
+
+    # Agregar la informción que se envio
+    if request.method == 'POST':
+        # Crear el formulario con los datos enviados
+        formulario = CategoriaForm(data=request.POST)
+        # Validar la información
+        if formulario.is_valid():
+            formulario.save()
+            data['mensaje'] = 'Categoria guardada'
+        else:
+            data['form'] = formulario
+    return render(request, 'categoria/agregar.html', data)
+
+
+def modificar_categoria(request, clv):
+    cate = get_object_or_404(Categoria, clv=clv)
+    data = {
+        'form': CategoriaForm(instance=cate)
+    }
+    # Si el usuarioya dijo que si, POST
+    if request.method == 'POST':
+        formulario = CategoriaForm(data=request.POST, instance=cate)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Categoria Actualizada")
+            return redirect(to='categorias')
+        # Si no es valido
+        data['form'] = formulario
+    return render(request, 'categoria/modificar.html', data)
+
+
+def eliminar_categoria(request, clv):
+    cate = get_object_or_404(Categoria, clv=clv)
+    cate.delete()
+    messages.success(request, "Categoria Eliminada")
+    return redirect(to='categorias')

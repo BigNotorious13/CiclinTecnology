@@ -17,8 +17,10 @@ class Equipo(models.Model):
 
 
 class Categoria(models.Model):
+    clv = models.PositiveIntegerField(primary_key=True, auto_created=True, blank=False, null=False)
     nombre = models.CharField(max_length=30)
-    requisitos = models.CharField(max_length=200)
+    can_corredores = models.PositiveIntegerField(blank=False, default=1)
+    hora = models.DateTimeField()
 
     def __str__(self):
         return self.nombre

@@ -2,30 +2,38 @@
 
 {% block title %} Equipos {% endblock %}
 {% block div_title %} Equipos {% endblock %}
-{% block tabla_titulos %}
 
-    <thead>
-        <tr>
-            {% for titulo in titulos %}
-                <th>{{ titulo }}</th>
-            {% endfor %}
-        </tr>
-    </thead>
 
-{% endblock %}
-{% block tabla_contenido %}
-    <a href="{% url 'agregar_equipo' %}">Agregar Nuevo Equipo</a>
-    <tbody>
 
-             {% for equipo in equipos %}
-            <tr>
-                <td>{{ equipo.clv }}</td>
-                <td>{{ equipo.nombre }}</td>
-                <td>{{ equipo.ciudad }}</td>
-                <td>{{ equipo.cantidad }}</td>
-                <td><a href="{% url 'modificar_equipo' clv=equipo.clv %}">Modificar</a><a href="{% url 'eliminar_equipo' clv=equipo.clv %}">Eliminar</a></td>
-            </tr>
-        {% endfor %}
+{% block div_contenido %}
+<a class="btn btn-success" href="{% url 'agregar_equipo' %}">Agregar Nuevo Equipo</a>
 
-    </tbody>
+<div class="d-flex justify-content-center py-2 px-2">
+<table class="table table-dark table-striped">
+<thead>
+<tr>
+    {% for titulo in titulos %}
+    <th scope="col">{{ titulo }}</th>
+    {% endfor %}
+</tr>
+</thead>
+<tbody>
+<tr>
+    {% for equipo in equipos %}
+    <td scope="row">{{ equipo.clv }}</td>
+    <td >{{ equipo.nombre }}</td>
+    <td >{{ equipo.ciudad }}</td>
+    <td>{{ equipo.cantidad }}</td>
+    <td>
+        <a class="btn btn-danger" href="{% url 'eliminar_equipo' equipo.clv %}"><i class="bi bi-trash3-fill fs-6"></i></a>
+        <a class="btn btn-warning" href="{% url 'modificar_equipo' equipo.clv %}"><i class="bi bi-pencil-fill fs-6"></i></a>
+    </td>
+    {% endfor %}
+</tr>
+</tbody>
+
+</table>
+
+</div>
+
 {% endblock %}
