@@ -4,7 +4,7 @@ from posiciones.models import Categoria, Carrera, Equipo, Competidor
 from posiciones.forms import CategoriaForm, CarreraForm, EquipoForm, CompetidorForm
 from django.views.generic import ListView
 
-
+#soria estuvo aqui
 # VISTAS BASADAS EN CLASES
 class CarreraListView(ListView):
     template_name = 'carreras/carreras_list.html'
