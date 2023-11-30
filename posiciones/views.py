@@ -1,16 +1,24 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
+
 from posiciones.models import Categoria, Carrera, Equipo, Competidor
 from posiciones.forms import CategoriaForm, CarreraForm, EquipoForm, CompetidorForm
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 
-#soria estuvo aqui
+
 # VISTAS BASADAS EN CLASES
 class CarreraListView(ListView):
     template_name = 'carreras/carreras_list.html'
     model = Carrera
     context_object_name = 'carreras'
     paginate_by = 5
+
+
+class CarreraCreateView(CreateView):
+    form_class = CarreraForm
+    template_name = 'carreras/carrera_new.html'
+    success_url = reverse_lazy('posiciones:carrera_list')
 
 
 class EquiposListView(ListView):
@@ -158,3 +166,9 @@ def eliminar_categoria(request, id_categoria):
     cate.delete()
     messages.success(request, "Categoria Eliminada")
     return redirect(to='categorias')
+
+
+def agregar_carrera(request):
+    data = {
+        'form': CarreraForm()
+    }

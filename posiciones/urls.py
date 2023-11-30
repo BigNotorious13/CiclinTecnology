@@ -4,7 +4,6 @@ from . import views
 urlpatterns = [
     path('', views.principal, name='home'),
     path('login/', views.login_juez, name='login'),
-   # path('inicio/', views.inicio, name='inicio'),
     path('posiciones/', views.posiciones, name='posiciones'),
     path('resultados/', views.resultados, name='resultados'),
 
@@ -20,5 +19,6 @@ urlpatterns = [
     path('categorias/', views.categorias, name='categorias'),
     path('categorias/clase/', views.CategoriaListView.as_view(), name='categorias_clase'),
 
-    path('carreras/carreras_list', views.CarreraListView.as_view(), name='carrera_list')
+    path('carreras/carreras_list/', views.CarreraListView.as_view(), name='carrera_list'),
+    path('carreras/carrera_new/', views.CarreraCreateView.as_view(), name='carrera_new')
 ]
