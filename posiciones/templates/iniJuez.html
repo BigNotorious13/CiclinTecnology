@@ -7,43 +7,62 @@
     <title>Cycling Tecnology</title>
 
     <link rel="stylesheet" href="{% static 'css/iniJuez.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com%22%3E/
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
-<body class="pagina">
+<body class="principal" background="{% static 'img/fondo.jpg' %} " >
+    <section>
+        <div class="contenedor">
+            <div class="formulario">
+                <div class="logo">
+                    <img class="img" src="{% static 'img/logo.png' %}">
+                </div>
+                <form action="#">
+                    <h2>Iniciar Sesión</h2>
 
-    <div class="principal">
-        <div class="barra">
-            <img class="logo" src="{% static 'img/logo.png' %}" alt="">
+                    <div class="input-contenedor">
+                        <input type="text" required>
+                        <label for="#">Usuario</label>
+                    </div>
+
+                    <div class="input-contenedor">
+                        <input type="password" required>
+                        <label for="#">Contraseña</label>
+                    </div>
+
+                    <div class="olvidar">
+                        <label for="#">
+                            <input type="checkbox" required>Recordar
+                            <a href="#">Olvidé la contraseña </a>
+                        </label>
+                    </div>
+                </form>
+
+                <div>
+                    <a href="{% url 'posiciones'  %} ">
+                        <button>Inicio</button>
+                    </a>
+<div class=registrar>
+                        <p>Iniciar sesión con:</p>
+                    </div>
+                    <div class="iconos">
+                        <div class="border-icon">
+                            <i class='bx bxl-instagram'></i>
+                        </div>
+                        <div class="border-icon">
+                            <i class='bx bxl-google'></i>
+                        </div>
+                        <div class="border-icon">
+                            <i class='bx bxl-facebook-circle' ></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="datos">
-            <div class="nombre">
-                <h2>Usuario</h2>
-                <label>
-                    <input type="text" class="nom" placeholder="USUARIO">
-                </label>
-            </div>
-            <div class="contra">
-                <h2>Contraseña</h2>
-                <label>
-                    <input type="text" class="nom" placeholder="********">
-                </label>
-            </div>
-            <div class="recupera">
-                <h2>¿Perdiste tu contraseña?</h2>
-            </div>
-            <div class="btnini">
-                <a href="{% url 'posiciones:carrera_list' %}"><button class="btnden">INICIO</button></a>
-            </div>
-            <div class="iniciar">
-                <h2>Iniciar sesion con</h2>
-            </div>
-            <div class="logos">
-                <img class="face" src="{% static 'img/facebook.png' %}" alt="">
-                <img class="face" src="{% static 'img/instagram.png' %}" alt="">
-                <img class="face" src="{% static 'img/google.png' %}" alt="">
-            </div>
-        </div>
-        
-    </div>
+    </section>
 </body>
+
 </html>
