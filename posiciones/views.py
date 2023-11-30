@@ -13,6 +13,13 @@ class CarreraListView(ListView):
     paginate_by = 5
 
 
+class EquiposListView(ListView):
+    template_name = 'equipos_vistaclase.html'
+    model = Equipo
+    context_object_name = 'equipos'
+    paginate_by = 5
+
+
 # FIN DE LAS VISTAS BASADAS EN CLASES
 
 
@@ -137,6 +144,13 @@ def modificar_categoria(request, id_categoria):
         # Si no es valido
         data['form'] = formulario
     return render(request, 'categoria/modificar.html', data)
+
+
+class CategoriaListView(ListView):
+    template_name = 'categorias_vistaclase.html'
+    model = Categoria
+    context_object_name = 'categorias'
+    paginate_by = 5
 
 
 def eliminar_categoria(request, id_categoria):
