@@ -20,5 +20,6 @@ urlpatterns = [
     path('categorias/clase/', views.CategoriaListView.as_view(), name='categorias_clase'),
 
     path('carreras/carreras_list/', views.CarreraListView.as_view(), name='carrera_list'),
-    path('carreras/carrera_new/', views.CarreraCreateView.as_view(), name='carrera_new')
+    path('carreras/carrera_new/', views.CarreraCreateView.as_view(), name='carrera_new'),
+    path('carreras/carrera_delete/<pk>/', views.CarreraDeleteView.as_view(), name='carrera_delete'),
 ]

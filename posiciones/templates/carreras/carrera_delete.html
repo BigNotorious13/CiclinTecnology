@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Eliminando Carrera</title>
 </head>
 <body>
+<h1>Eliminar una Carrera</h1>
+<form method="POST">
+    {% csrf_token %}
+    <p>Confirme si desea eliminar una carrera</p>
+    <button type="submit">eliminar</button>
+</form>
+
 
 </body>
 </html>
