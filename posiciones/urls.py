@@ -22,4 +22,5 @@ urlpatterns = [
     path('carreras/carreras_list/', views.CarreraListView.as_view(), name='carrera_list'),
     path('carreras/carrera_new/', views.CarreraCreateView.as_view(), name='carrera_new'),
     path('carreras/carrera_delete/<pk>/', views.CarreraDeleteView.as_view(), name='carrera_delete'),
+    path('carreras/carrera_update/<pk>/', views.CarreraUpdateView.as_view(), name='carrera_update'),
 ]

@@ -1,13 +1,41 @@
 from django.db import models
 
 
+class Organizador(models.Model):
+    id_organizador = models.PositiveIntegerField(primary_key=True, blank=False, null=False)
+    nombre = models.CharField(max_length=30, unique=True, blank=False, null=False)
+    usuario = models.CharField(max_length=30, unique=True, blank=False, null=False)
+    password = models.CharField(max_length=20, blank=False, null=False)
+
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        verbose_name_plural = "Organizadores"
+
+
+class Carrera(models.Model):
+    id_carrera = models.PositiveIntegerField(primary_key=True, blank=False, null=False)
+    nombre = models.CharField(max_length=30, unique=True, blank=False, null=False)
+    vueltas = models.PositiveIntegerField(blank=False, null=False)
+    ubicacion = models.CharField(max_length=40, null=False, blank=False)
+    fecha = models.DateTimeField(null=False, blank=False, help_text="Fecha y hora de la carrera")
+
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        verbose_name_plural = "Carreras"
+
+
 class Equipo(models.Model):
     id_equipo = models.PositiveIntegerField(verbose_name='Clave', primary_key=True, blank=False, null=False)
     ciudad = models.CharField(verbose_name='Ciudad', max_length=20, null=False)
     nombre = models.CharField(verbose_name='Nombre', max_length=20, unique=True, blank=False, null=False)
-    cantidad_competidores = models.PositiveIntegerField(verbose_name='Cantidad de Competidores', blank=False, null=False)
+    cantidad_competidores = models.PositiveIntegerField(verbose_name='Cantidad de Competidores', blank=False,
+                                                        null=False)
 
-    def _str_(self):
+    def __str__(self):
         return self.nombre
 
     class Meta:
@@ -36,7 +64,7 @@ class Competidor(models.Model):
     tipo = models.TextField(verbose_name='Tipo de Sangre', choices=tipo_sangre, blank=False)
     id_equipo = models.ForeignKey(Equipo, on_delete=models.PROTECT)  # foreinKey
 
-    def _str_(self):
+    def __str__(self):
         return self.nombre
 
     class Meta:
@@ -47,52 +75,42 @@ class Categoria(models.Model):
     id_categoria = models.PositiveIntegerField(verbose_name='Clave', primary_key=True, blank=False, null=False)
     nombre = models.CharField(verbose_name='Nombre', max_length=30, unique=True, blank=False, null=False)
     requisitos = models.TextField(verbose_name='Requisitos', blank=True, null=True)
-    many_comp = models.ManyToManyField(Competidor)  # muchas a muchos
 
-    def _str_(self):
+    def __str__(self):
         return self.nombre
 
     class Meta:
         verbose_name_plural = "Categorias"
 
 
-class Carrera(models.Model):
-    id_carrera = models.PositiveIntegerField(primary_key=True, blank=False, null=False)
-    nombre = models.CharField(max_length=30, unique=True, blank=False, null=False)
-    vueltas = models.PositiveIntegerField(blank=False, null=False)
-    ubicacion = models.CharField(max_length=40, null=False, blank=False)
-    fecha = models.DateTimeField(null=False, blank=False, help_text="Fecha y hora de la carrera")
-    many_carr_comp = models.ManyToManyField(Competidor, through="CarreraCompetidor",
-                                            through_fields=('id_carrera', 'id_competidor'), )  # muchas a muchos
-
-    def _str_(self):
-        return self.nombre
-
-    class Meta:
-        verbose_name_plural = "Carreras"
-
-
-class Organizador(models.Model):
-    id_organizador = models.PositiveIntegerField(primary_key=True, blank=False, null=False)
-    nombre = models.CharField(max_length=30, unique=True, blank=False, null=False)
-    usuario = models.CharField(max_length=30, unique=True, blank=False, null=False)
-    password = models.CharField(max_length=20, blank=False, null=False)
-    many_carr = models.ManyToManyField(Carrera)
-
-    def _str_(self):
-        return self.nombre
-
-    class Meta:
-        verbose_name_plural = "Organizadores"
-
-
-class CarreraCompetidor(models.Model):
+class CarrEqui(models.Model):
     id_carrera = models.ForeignKey(Carrera, on_delete=models.PROTECT)  # foreinKey
-    id_competidor = models.ForeignKey(Competidor, on_delete=models.PROTECT)  # foreinKey
-    tiempo = models.TimeField()
+    id_equipo = models.ForeignKey(Equipo, on_delete=models.PROTECT)  # foreinKey
 
-    def _str_(self):
-        return self.id
+    def __str__(self):
+        return f"{self.id_carrera} - {self.id_equipo}"
 
     class Meta:
-        verbose_name_plural = "Carreras Competidores"
+        verbose_name_plural = "Carrera_Equipo"
+
+
+class OrgCarr(models.Model):
+    id_organizador = models.ForeignKey(Organizador, on_delete=models.PROTECT)  # foreinKey
+    id_carrera = models.ForeignKey(Carrera, on_delete=models.PROTECT)  # foreinKey
+
+    def __str__(self):
+        return f"{self.id_organizador} - {self.id_carrera}"
+
+    class Meta:
+        verbose_name_plural = "Organizador_Carrera"
+
+
+class CompCat(models.Model):
+    id_competidor = models.ForeignKey(Competidor, on_delete=models.PROTECT)  # foreinKey
+    id_categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT)  # foreinKey
+
+    def __str__(self):
+        return f"{self.id_competidor} - {self.id_categoria}"
+
+    class Meta:
+        verbose_name_plural = "Competidor_Categoria"

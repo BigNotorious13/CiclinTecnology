@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 
 from posiciones.models import Categoria, Carrera, Equipo, Competidor
 from posiciones.forms import CategoriaForm, CarreraForm, EquipoForm, CompetidorForm
-from django.views.generic import ListView, CreateView, DeleteView
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 
 
 # VISTAS BASADAS EN CLASES
@@ -21,17 +21,26 @@ class CarreraCreateView(CreateView):
     success_url = reverse_lazy('posiciones:carrera_list')
 
 
-class EquiposListView(ListView):
-    template_name = 'equipos_vistaclase.html'
-    model = Equipo
-    context_object_name = 'equipos'
-    paginate_by = 5
+class CarreraUpdateView(UpdateView):
+    template_name = 'carreras/carrera_update.html'
+    #form_class = CarreraForm
+    fields = ['nombre', 'vueltas', 'ubicacion','fecha']
+    model = Carrera
+    success_url = reverse_lazy('posiciones:carrera_list')
 
 
 class CarreraDeleteView(DeleteView):
     model = Carrera
     template_name = 'carreras/carrera_delete.html'
     success_url = reverse_lazy('posiciones:carrera_list')
+
+
+##############################################################################
+class EquiposListView(ListView):
+    template_name = 'equipos_vistaclase.html'
+    model = Equipo
+    context_object_name = 'equipos'
+    paginate_by = 5
 
 
 # FIN DE LAS VISTAS BASADAS EN CLASES
