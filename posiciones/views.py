@@ -1,10 +1,12 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.http.response import StreamingHttpResponse
 
 from posiciones.models import Categoria, Carrera, Equipo, Competidor
 from posiciones.forms import CategoriaForm, CarreraForm, EquipoForm, CompetidorForm
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
+import cv2
 
 
 # VISTAS BASADAS EN CLASES
@@ -42,12 +44,15 @@ class EquiposListView(ListView):
     context_object_name = 'equipos'
     paginate_by = 5
 
+
 ##############################################################################
 
 class CorredorListView(ListView):
     template_name = 'corredores/corredores_list.html'
     model = Competidor
     context_object_name = 'corredores'
+
+
 class CorredorCreateView(CreateView):
     # 1. Especificar la Forma
     form_class = CompetidorForm
@@ -56,17 +61,20 @@ class CorredorCreateView(CreateView):
     # Redireccionar
     success_url = reverse_lazy('corredores_list')
 
+
 class CorredorUpdateView(UpdateView):
     template_name = 'corredores/corredores_update.html'
-    #form_class = ProductoForm
+    # form_class = ProductoForm
     fields = ['nombre']
     model = Competidor
     success_url = reverse_lazy('corredores_list')
+
 
 class CorredorDeleteView(DeleteView):
     template_name = 'corredores/corredores_list.html'
     form_class = CompetidorForm
     success_url = reverse_lazy('corredores:corredores_list')
+
 
 # FIN DE LAS VISTAS BASADAS EN CLASES
 
@@ -157,6 +165,31 @@ def categorias(request):
         'categorias': cate
     }
     return render(request, 'categorias.html', context=data)
+
+
+class Streaming:
+    def __init__(self):
+        self.video = cv2.VideoCapture(0)
+
+    def __del__(self):
+        self.video.release()
+
+    def get_frame(self):
+        success, image = self.video.read()
+        ret, jpeg = cv2.imencode('.jpg', image)
+        return jpeg.tobytes()
+
+
+def gen(camera):
+    while True:
+        frame = camera.get_frame()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+
+def StreamCam(request):
+    return StreamingHttpResponse(gen(Streaming()),
+                                 content_type='multipart/x-mixed-replace; boundary=frame')
 
 
 def agregar_categoria(request):

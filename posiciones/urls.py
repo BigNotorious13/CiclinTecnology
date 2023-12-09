@@ -34,4 +34,6 @@ urlpatterns = [
     path('corredores_update/<pk>',views.CorredorUpdateView.as_view(), name='corredor_update'),
     path('corredores_delete/<pk>',views.CorredorDeleteView.as_view(), name='corredor_delete'),
 
+    path('streaming', views.StreamCam, name='streaming')
+
 ]
