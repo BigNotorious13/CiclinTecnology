@@ -23,4 +23,10 @@ urlpatterns = [
     path('carreras/carrera_new/', views.CarreraCreateView.as_view(), name='carrera_new'),
     path('carreras/carrera_delete/<pk>/', views.CarreraDeleteView.as_view(), name='carrera_delete'),
     path('carreras/carrera_update/<pk>/', views.CarreraUpdateView.as_view(), name='carrera_update'),
+    # BASADA EN FUNCIONES
+    path('carreras/carreras_listF/', views.ListarCarreras, name='carrera_listF'),
+    path('carreras/carrera_newF/', views.AgregarCarrera, name='carrera_newF'),
+    path('carreras/carrera_deleteF/<int:id_carrera>/', views.ELiminarCarrera, name='carrera_deleteF'),
+    path('carreras/carrera_updateF/<int:id_carrera>/', views.ActualizarCarrera, name='carrera_updateF'),
+
 ]

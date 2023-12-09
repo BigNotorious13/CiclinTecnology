@@ -86,6 +86,7 @@ class Categoria(models.Model):
 class CarrEqui(models.Model):
     id_carrera = models.ForeignKey(Carrera, on_delete=models.PROTECT)  # foreinKey
     id_equipo = models.ForeignKey(Equipo, on_delete=models.PROTECT)  # foreinKey
+    posicion= models.PositiveIntegerField(verbose_name='Posicion', blank=False, null=False)
 
     def __str__(self):
         return f"{self.id_carrera} - {self.id_equipo}"

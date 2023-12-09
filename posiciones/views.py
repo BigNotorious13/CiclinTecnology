@@ -23,8 +23,8 @@ class CarreraCreateView(CreateView):
 
 class CarreraUpdateView(UpdateView):
     template_name = 'carreras/carrera_update.html'
-    #form_class = CarreraForm
-    fields = ['nombre', 'vueltas', 'ubicacion','fecha']
+    # form_class = CarreraForm
+    fields = ['nombre', 'vueltas', 'ubicacion', 'fecha']
     model = Carrera
     success_url = reverse_lazy('posiciones:carrera_list')
 
@@ -183,7 +183,51 @@ def eliminar_categoria(request, id_categoria):
     return redirect(to='categorias')
 
 
-def agregar_carrera(request):
+def ListarCarreras(request):
+    carreras = Carrera.objects.all()
+    data = {
+        'carreras': carreras
+    }
+
+    return render(request, 'carreras/carreras_listF.html', context=data)
+
+
+def AgregarCarrera(request):
     data = {
         'form': CarreraForm()
     }
+
+    if (request.method == 'POST'):
+        formulario = CarreraForm(data=request.POST)
+
+        if formulario.is_valid():
+            formulario.save()
+            data['mensaje'] = "categoria guardada"
+        else:
+            data['form'] = formulario
+
+    return render(request, 'carreras/carrera_newF.html', context=data)
+
+
+def ELiminarCarrera(request, id_carrera):
+    carrera = get_object_or_404(Carrera, id_carrera=id_carrera)
+    carrera.delete()
+    return redirect(to='posiciones:carrera_listF')
+
+
+def ActualizarCarrera(request, id_carrera):
+    carrera = get_object_or_404(Carrera, id_carrera=id_carrera)
+    data = {
+        'form': CarreraForm(instance=carrera)
+    }
+    if request.method == 'POST':
+        formulario = CarreraForm(data=request.POST, instance=carrera)
+
+        if formulario.is_valid():
+            formulario.save()
+            data['mensaje'] = "categoria guardada"
+            return redirect(to='posiciones:carrera_listF')
+
+        data['form'] = formulario
+
+    return render(request, 'carreras/carrera_updateF.html', context=data)
