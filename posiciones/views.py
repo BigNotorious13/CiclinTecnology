@@ -42,6 +42,31 @@ class EquiposListView(ListView):
     context_object_name = 'equipos'
     paginate_by = 5
 
+##############################################################################
+
+class CorredorListView(ListView):
+    template_name = 'corredores/corredores_list.html'
+    model = Competidor
+    context_object_name = 'corredores'
+class CorredorCreateView(CreateView):
+    # 1. Especificar la Forma
+    form_class = CompetidorForm
+    # Template que responde a la vista
+    template_name = 'corredores/corredores_new.html'
+    # Redireccionar
+    success_url = reverse_lazy('corredores_list')
+
+class CorredorUpdateView(UpdateView):
+    template_name = 'corredores/corredores_update.html'
+    #form_class = ProductoForm
+    fields = ['nombre']
+    model = Competidor
+    success_url = reverse_lazy('corredores_list')
+
+class CorredorDeleteView(DeleteView):
+    template_name = 'corredores/corredores_list.html'
+    form_class = CompetidorForm
+    success_url = reverse_lazy('corredores:corredores_list')
 
 # FIN DE LAS VISTAS BASADAS EN CLASES
 

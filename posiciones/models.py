@@ -10,6 +10,9 @@ class Organizador(models.Model):
     def __str__(self):
         return self.nombre
 
+    def save(self, args, **kwargs):
+        self.slug = slugify(self.nombre)
+        super(Competidor, self).save(args, **kwargs)
     class Meta:
         verbose_name_plural = "Organizadores"
 

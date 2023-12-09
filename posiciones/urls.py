@@ -29,4 +29,9 @@ urlpatterns = [
     path('carreras/carrera_deleteF/<int:id_carrera>/', views.ELiminarCarrera, name='carrera_deleteF'),
     path('carreras/carrera_updateF/<int:id_carrera>/', views.ActualizarCarrera, name='carrera_updateF'),
 
+    path('corredores/',views.CorredorListView.as_view(), name='corredores_list'),
+    path('corredores_new/',views.CorredorCreateView.as_view(), name='corredor_new'),
+    path('corredores_update/<pk>',views.CorredorUpdateView.as_view(), name='corredor_update'),
+    path('corredores_delete/<pk>',views.CorredorDeleteView.as_view(), name='corredor_delete'),
+
 ]
