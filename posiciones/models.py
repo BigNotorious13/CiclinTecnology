@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 
 class Organizador(models.Model):
@@ -13,15 +14,22 @@ class Organizador(models.Model):
     def save(self, args, **kwargs):
         self.slug = slugify(self.nombre)
         super(Competidor, self).save(args, **kwargs)
+
     class Meta:
         verbose_name_plural = "Organizadores"
 
 
 class Carrera(models.Model):
+    estado_carrera = {
+        ("0", "Sin Correr"),
+        ("1", "finalizada"),
+
+    }
     id_carrera = models.PositiveIntegerField(primary_key=True, blank=False, null=False)
     nombre = models.CharField(max_length=30, unique=True, blank=False, null=False)
     vueltas = models.PositiveIntegerField(blank=False, null=False)
     ubicacion = models.CharField(max_length=40, null=False, blank=False)
+    estado = models.CharField(max_length=15, verbose_name='Estado de la carrera', choices=estado_carrera, blank=False)
     fecha = models.DateTimeField(null=False, blank=False, help_text="Fecha y hora de la carrera")
 
     def __str__(self):
@@ -89,7 +97,7 @@ class Categoria(models.Model):
 class CarrEqui(models.Model):
     id_carrera = models.ForeignKey(Carrera, on_delete=models.PROTECT)  # foreinKey
     id_equipo = models.ForeignKey(Equipo, on_delete=models.PROTECT)  # foreinKey
-    posicion= models.PositiveIntegerField(verbose_name='Posicion', blank=False, null=False)
+    posicion = models.PositiveIntegerField(verbose_name='Posicion', blank=False, null=False)
 
     def __str__(self):
         return f"{self.id_carrera} - {self.id_equipo}"

@@ -1,15 +1,63 @@
+from bootstrap_modal_forms.generic import BSModalCreateView
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.http.response import StreamingHttpResponse
 
-from posiciones.models import Categoria, Carrera, Equipo, Competidor
-from posiciones.forms import CategoriaForm, CarreraForm, EquipoForm, CompetidorForm
+from posiciones.models import Categoria, Carrera, Equipo, Competidor, CarrEqui
+from posiciones.forms import CategoriaForm, CarreraForm, EquipoForm, CompetidorForm, CarreraEquipoForm
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 import cv2
 
 
 # VISTAS BASADAS EN CLASES
+
+
+class ResultadosListView(ListView):
+    template_name = 'resultados/resultado.html'
+    model = Carrera
+    context_object_name = 'resultados'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['carrera'] = self.request.GET.get('carrera')
+        return context
+
+
+class ResultadoNewView(ListView):
+    template_name = 'resultados/resultado_new.html'
+    model = Equipo
+    context_object_name = 'resultados'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['carrera'] = self.request.GET.get('carrera')
+        return context
+
+
+class AsignarPosicionView(CreateView):
+    form_class = CarreraEquipoForm
+    template_name = 'resultados/asignar_resultado.html'
+    success_url = reverse_lazy('posiciones:resultados')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['equipo'] = self.request.GET.get('equipo')
+        context['carrera'] = self.request.GET.get('carrera')
+        return context
+
+
+class CarrEquiListView(ListView):
+    template_name = 'resultados/carr_equi_list.html'
+    model = CarrEqui
+    context_object_name = 'resultados'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['carrera'] = self.request.GET.get('carrera')
+        return context
+
+
 class CarreraListView(ListView):
     template_name = 'carreras/carreras_list.html'
     model = Carrera

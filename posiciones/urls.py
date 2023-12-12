@@ -5,7 +5,6 @@ urlpatterns = [
     path('', views.principal, name='home'),
     path('login/', views.login_juez, name='login'),
     path('posiciones/', views.posiciones, name='posiciones'),
-    path('resultados/', views.resultados, name='resultados'),
 
     path('equipos/agregar/', views.agregar_equipo, name='agregar_equipo'),
     path('equipos/modificar/<int:id_equipo>', views.modificar_equipo, name='modificar_equipo'),
@@ -29,11 +28,16 @@ urlpatterns = [
     path('carreras/carrera_deleteF/<int:id_carrera>/', views.ELiminarCarrera, name='carrera_deleteF'),
     path('carreras/carrera_updateF/<int:id_carrera>/', views.ActualizarCarrera, name='carrera_updateF'),
 
-    path('corredores/',views.CorredorListView.as_view(), name='corredores_list'),
-    path('corredores_new/',views.CorredorCreateView.as_view(), name='corredor_new'),
-    path('corredores_update/<pk>',views.CorredorUpdateView.as_view(), name='corredor_update'),
-    path('corredores_delete/<pk>',views.CorredorDeleteView.as_view(), name='corredor_delete'),
+    path('corredores/', views.CorredorListView.as_view(), name='corredores_list'),
+    path('corredores_new/', views.CorredorCreateView.as_view(), name='corredor_new'),
+    path('corredores_update/<pk>', views.CorredorUpdateView.as_view(), name='corredor_update'),
+    path('corredores_delete/<pk>', views.CorredorDeleteView.as_view(), name='corredor_delete'),
 
-    path('streaming', views.StreamCam, name='streaming')
+    path('streaming', views.StreamCam, name='streaming'),
+
+    path('resultados/', views.ResultadosListView.as_view(), name='resultados'),
+    path('resultado_new/', views.ResultadoNewView.as_view(), name='resultado_new'),
+    path('carr_equi_list/', views.CarrEquiListView.as_view(), name='carr_equi_list'),
+    path('asignar_resultado/', views.AsignarPosicionView.as_view(), name='asignar_resultado'),
 
 ]

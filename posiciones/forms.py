@@ -1,5 +1,5 @@
 from django import forms
-from posiciones.models import Categoria, Competidor, Equipo, Carrera
+from posiciones.models import Categoria, Competidor, Equipo, Carrera, CarrEqui
 
 
 class CategoriaForm(forms.ModelForm):
@@ -23,4 +23,10 @@ class EquipoForm(forms.ModelForm):
 class CarreraForm(forms.ModelForm):
     class Meta:
         model = Carrera
+        fields = '__all__'
+
+
+class CarreraEquipoForm(forms.ModelForm):
+    class Meta:
+        model = CarrEqui
         fields = '__all__'
