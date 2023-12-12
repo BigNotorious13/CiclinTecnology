@@ -4,6 +4,8 @@
 {% load crispy_forms_tags %}
 
 {% block div_contenido %}
+
+   {% if request.user.is_authenticated  %}
     <!-- Begin Page Content -->
     <div class="container-fluid">
         <!-- Page Heading -->
@@ -35,4 +37,5 @@
             </div>
         </div>
     </div>
+    {% endif %}
 {% endblock %}
