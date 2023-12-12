@@ -6,6 +6,7 @@
 
 
 {% block div_contenido %}
+{% if request.user.is_authenticated  %}
     <a class="btn btn-success" href="{% url 'posiciones:carrera_new' %}">Agregar Nueva Carrera</a>
     <a class="btn btn-danger" href="{% url 'posiciones:carrera_listF' %}">Carrera (basada en funciones)</a>
 
@@ -42,5 +43,6 @@
         </table>
 
     </div>
+{% endif %}
 
 {% endblock %}

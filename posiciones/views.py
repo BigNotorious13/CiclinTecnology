@@ -3,6 +3,8 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.http.response import StreamingHttpResponse
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 from posiciones.models import Categoria, Carrera, Equipo, Competidor, CarrEqui
 from posiciones.forms import CategoriaForm, CarreraForm, EquipoForm, CompetidorForm, CarreraEquipoForm
@@ -71,6 +73,7 @@ class CarreraCreateView(CreateView):
     success_url = reverse_lazy('posiciones:carrera_list')
 
 
+@method_decorator(login_required, name='dispatch')
 class CarreraUpdateView(UpdateView):
     template_name = 'carreras/carrera_update.html'
     # form_class = CarreraForm
@@ -86,6 +89,7 @@ class CarreraDeleteView(DeleteView):
 
 
 ##############################################################################
+
 class EquiposListView(ListView):
     template_name = 'equipos_vistaclase.html'
     model = Equipo
@@ -94,7 +98,6 @@ class EquiposListView(ListView):
 
 
 ##############################################################################
-
 class CorredorListView(ListView):
     template_name = 'corredores/corredores_list.html'
     model = Competidor
@@ -128,14 +131,17 @@ class CorredorDeleteView(DeleteView):
 
 
 # Create your views here.
+
 def principal(request):
     return render(request, 'principal.html')
 
 
+@login_required
 def posiciones(request):
     return render(request, 'posiciones/posicion.html')
 
 
+@login_required
 def resultados(request):
     return render(request, 'resultados/resultado.html')
 
@@ -154,7 +160,7 @@ def login_juez(request):
 #             'carreras/carreras_list.html',
 #             context=data)
 
-
+@login_required
 def agregar_equipo(request):
     data = {
         'form': EquipoForm()
@@ -173,6 +179,7 @@ def agregar_equipo(request):
     return render(request, 'equipos/agregar.html', data)
 
 
+@login_required
 def modificar_equipo(request, id_equipo):
     equipo = get_object_or_404(Equipo, id_equipo=id_equipo)
     data = {
@@ -190,6 +197,7 @@ def modificar_equipo(request, id_equipo):
     return render(request, 'equipos/modificar.html', data)
 
 
+@login_required
 def eliminar_equipo(request, id_equipo):
     equipo = get_object_or_404(Equipo, id_equipo=id_equipo)
     equipo.delete()
@@ -197,6 +205,7 @@ def eliminar_equipo(request, id_equipo):
     return redirect(to='equipos')
 
 
+@login_required
 def equipos(request):
     equi = Equipo.objects.all()
     data = {
@@ -206,6 +215,7 @@ def equipos(request):
     return render(request, 'Equipos.html', context=data)
 
 
+@login_required
 def categorias(request):
     cate = Categoria.objects.all()
     data = {
@@ -240,6 +250,7 @@ def StreamCam(request):
                                  content_type='multipart/x-mixed-replace; boundary=frame')
 
 
+@login_required
 def agregar_categoria(request):
     data = {
         'form': CategoriaForm()
@@ -258,6 +269,7 @@ def agregar_categoria(request):
     return render(request, 'categoria/agregar.html', data)
 
 
+@login_required
 def modificar_categoria(request, id_categoria):
     cate = get_object_or_404(Categoria, id_categoria=id_categoria)
     data = {
@@ -282,6 +294,7 @@ class CategoriaListView(ListView):
     paginate_by = 5
 
 
+@login_required
 def eliminar_categoria(request, id_categoria):
     cate = get_object_or_404(Categoria, id_categoria=id_categoria)
     cate.delete()
@@ -289,6 +302,7 @@ def eliminar_categoria(request, id_categoria):
     return redirect(to='categorias')
 
 
+@login_required
 def ListarCarreras(request):
     carreras = Carrera.objects.all()
     data = {
@@ -298,6 +312,7 @@ def ListarCarreras(request):
     return render(request, 'carreras/carreras_listF.html', context=data)
 
 
+@login_required
 def AgregarCarrera(request):
     data = {
         'form': CarreraForm()
@@ -315,12 +330,14 @@ def AgregarCarrera(request):
     return render(request, 'carreras/carrera_newF.html', context=data)
 
 
+@login_required
 def ELiminarCarrera(request, id_carrera):
     carrera = get_object_or_404(Carrera, id_carrera=id_carrera)
     carrera.delete()
     return redirect(to='posiciones:carrera_listF')
 
 
+@login_required
 def ActualizarCarrera(request, id_carrera):
     carrera = get_object_or_404(Carrera, id_carrera=id_carrera)
     data = {

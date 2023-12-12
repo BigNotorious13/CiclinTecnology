@@ -5,13 +5,14 @@
     <title>Eliminando Carrera</title>
 </head>
 <body>
+{% if request.user.is_authenticated  %}
 <h1>Eliminar una Carrera</h1>
 <form method="POST">
     {% csrf_token %}
     <p>Confirme si desea eliminar una carrera</p>
     <button type="submit">eliminar</button>
 </form>
-
+{% endif %}
 
 </body>
 </html>
